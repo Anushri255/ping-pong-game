@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ping Pong</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #111;
+        }
 
+    #gameContainer {
+        position: relative;
+        width: 800px;
+        height: 600px;
+        background-color: #333;
+        border: 3px solid #fff;
+    }
+
+    .paddle {
+        position: absolute;
+        width: 15px;
+        height: 100px;
+        background-color: #eaeaea;
+    }
+
+        #paddleLeft {
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #paddleRight {
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #f9f9f9;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gameContainer">
+        <div id="paddleLeft" class="paddle"></div>
+        <div id="paddleRight" class="paddle"></div>
+        <div id="ball"></div>
+    </div>
+
+</body>
+
+</html>
