@@ -61,4 +61,83 @@
 
 </body>
 
+<script>
+    const gameArea = document.getElementById('gameContainer');
+const paddle1 = document.getElementById('paddleLeft');
+const paddle2 = document.getElementById('paddleRight');
+const ball = document.getElementById('ball');
+
+let ballX = 390, ballY = 290;
+let ballSpeedX = 2, ballSpeedY = 2;
+let paddle1Y = 250, paddle2Y = 250;
+const paddleSpeed = 20;
+const gameHeight = gameArea.offsetHeight;
+const gameWidth = gameArea.offsetWidth;
+
+function moveBall() {
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
+
+    if (ballY <= 0 || ballY >= gameHeight - 20) {
+        ballSpeedY *= -1;
+    }
+
+    if (
+        (ballX <= 15 && ballY >= paddle1Y && ballY <= paddle1Y + 100) ||
+        (ballX >= gameWidth - 35 && ballY >= paddle2Y && ballY <= paddle2Y + 100)
+    ) {
+        ballSpeedX *= -1;
+    }
+
+    if (ballX <= 0 || ballX >= gameWidth - 20) {
+        resetBall();
+    }
+
+    ball.style.left = `${ballX}px`;
+    ball.style.top = `${ballY}px`;
+}
+
+function movePaddle1(direction) {
+    paddle1Y += direction * paddleSpeed;
+    paddle1Y = Math.max(Math.min(paddle1Y, gameHeight - 100), 0);
+    paddle1.style.top = `${paddle1Y}px`;
+}
+
+function movePaddle2(direction) {
+    paddle2Y += direction * paddleSpeed;
+    paddle2Y = Math.max(Math.min(paddle2Y, gameHeight - 100), 0);
+    paddle2.style.top = `${paddle2Y}px`;
+}
+
+function resetBall() {
+    ballX = 390;
+    ballY = 290;
+    ballSpeedX *= -1;
+}
+
+document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+        case 'w':
+            movePaddle1(-1);
+            break;
+        case 's':
+            movePaddle1(1);
+            break;
+        case 'ArrowUp':
+            movePaddle2(-1);
+            break;
+        case 'ArrowDown':
+            movePaddle2(1);
+            break;
+    }
+});
+
+function gameLoop() {
+    moveBall();
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+
 </html>
