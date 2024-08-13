@@ -38,7 +38,17 @@
             top: 50%;
             transform: translateY(-50%);
         }
+        #difficultyMenu {
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
+        #difficultyMenu button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
         #ball {
             position: absolute;
             width: 20px;
@@ -53,6 +63,13 @@
 </head>
 
 <body>
+    <div id="difficultyMenu">
+        <h1>Select Difficulty</h1>
+        <button onclick="startGame('easy')">Easy</button>
+        <button onclick="startGame('medium')">Medium</button>
+        <button onclick="startGame('hard')">Hard</button>
+    </div>
+
     <div id="gameContainer">
         <div id="paddleLeft" class="paddle"></div>
         <div id="paddleRight" class="paddle"></div>
@@ -71,8 +88,32 @@ let ballX = 390, ballY = 290;
 let ballSpeedX = 2, ballSpeedY = 2;
 let paddle1Y = 250, paddle2Y = 250;
 const paddleSpeed = 20;
-const gameHeight = gameArea.offsetHeight;
-const gameWidth = gameArea.offsetWidth;
+let gameHeight, gameWidth;
+
+function startGame(difficulty) {
+            const difficultyMenu = document.getElementById('difficultyMenu');
+            difficultyMenu.style.display = 'none';
+            gameArea.style.display = 'block';
+
+            gameHeight = gameArea.offsetHeight;
+            gameWidth = gameArea.offsetWidth;
+
+            if (difficulty === 'easy') {
+                ballSpeedX = 4;
+                ballSpeedY = 4;
+            } else if (difficulty === 'medium') {
+                ballSpeedX = 6;
+                ballSpeedY = 6;
+            } else if (difficulty === 'hard') {
+                ballSpeedX = 8;
+                ballSpeedY = 8;
+            }
+
+            resetBall();
+            gameLoop();
+        }
+
+
 
 function moveBall() {
     ballX += ballSpeedX;
