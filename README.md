@@ -2,6 +2,8 @@
 
 A simple Ping Pong game implemented using HTML, CSS, and JavaScript. The game features a selectable difficulty level and tracks the score for the right player.
 
+## Hosted on https://anushri255.github.io/ping-pong.io/ 
+
 ## Features
 
 - Difficulty levels: Easy, Medium, Hard
